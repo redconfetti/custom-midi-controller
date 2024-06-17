@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "EditorConfig.editorconfig",
+    "shd101wyy.markdown-preview-enhanced",
+    "DavidAnson.vscode-markdownlint",
+    "esbenp.prettier-vscode",
+    "stkb.rewrap",
+  ]
+}
