@@ -5,5 +5,8 @@
     "DavidAnson.vscode-markdownlint",
     "esbenp.prettier-vscode",
     "stkb.rewrap",
+    "platformio.platformio-ide",
+    "ms-vscode.cpptools",
+    "Wokwi.wokwi-vscode"
   ]
 }
