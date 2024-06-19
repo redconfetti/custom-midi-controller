@@ -54,21 +54,58 @@ files in alphabetical order.
 
 [Sketch Build Process]: https://arduino.github.io/arduino-cli/1.0/sketch-build-process/
 
-## VS-Code
+## VSCode
 
 The Arduino IDE is designed to be less daunting for non-tech-related folks, so
 it is limited in the options it provides.
 
-If you want more abilities when developing, you can use [VS-Code][] to develop
+If you want more abilities when developing, you can use [VSCode][] to develop
 sketches.
 
 [How to Use VS Code for Creating and Uploading Arduino Sketches]
 
 * [Arduino CLI]
 
-[VS-Code]: https://code.visualstudio.com/
+[VSCode]: https://code.visualstudio.com/
 [How to Use VS Code for Creating and Uploading Arduino Sketches]: https://www.circuitstate.com/tutorials/how-to-use-vs-code-for-creating-and-uploading-arduino-sketches/
 [Arduino CLI]: https://arduino.github.io/arduino-cli/0.34/
+
+## Arduino for VS-Code
+
+Install the [Arduino Community Edition][] extension for VSCode. It will be
+recommended if this project is opened in VSCode.
+
+This extension relies on the [Arduino Command-Line Interface (CLI)] tool. It
+should prompt you to use a bundled version of the tool after you try to
+run the first command with it.
+
+To access the commands, press F1, Ctrl + Shift + P, or Cmd + Shift + P (Mac) to
+access the command menu. From this menu type "Arduino" and the list of
+related commands will show.
+
+```bash
+# view arduino-cli configuration
+$ arduino-cli config dump
+
+# initialize arduino-cli configuration
+$ arduino-cli config init
+Config file written to: /Users/jason/Library/Arduino15/arduino-cli.yaml
+
+# list libraries installed
+arduino-cli lib list
+```
+
+You'll need to configure the Arduino for VSCode extension to know where to find
+the arduino-cli executable. You can do this from a Mac/Linux command line
+using the `which` command.
+
+```bash
+$ which arduino-cli
+/opt/homebrew/bin/arduino-cli
+```
+
+[Arduino Community Edition]: https://marketplace.visualstudio.com/items?itemName=vscode-arduino.vscode-arduino-community
+[Arduino Command-Line Interface (CLI)]: https://www.arduino.cc/pro/software-pro-cli/
 
 ## C Programming Notes
 
