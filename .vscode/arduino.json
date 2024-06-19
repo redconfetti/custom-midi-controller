@@ -1,3 +1,6 @@
 {
-    "board": "arduino:avr:leonardo"
+    "board": "arduino:avr:leonardo",
+    "sketch": "_MIDI_Controller/_MIDI_Controller.ino",
+    "output": "./build",
+    "port": "/dev/tty.usbmodemMIDI1"
 }

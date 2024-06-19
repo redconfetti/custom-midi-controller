@@ -39,77 +39,57 @@
 
 /////////////////////////////////////////////
 // LIBRARIES
-// -- Defines the MIDI library -- //
-//////////////////////////////////////
-
-// if using with ATmega328 - Uno, Mega, Nano...
-#ifdef ATMEGA328
-#include <MIDI.h>
-MIDI_CREATE_DEFAULT_INSTANCE();
-#endif
 
 // if using with ATmega32U4 - Micro, Pro Micro, Leonardo...
 #ifdef ATMEGA32U4
-#include <MIDIUSB.h>
-
-#ifdef MIDI_DIN
-#include <MIDI.h>  // adds the MIDI library to use the hardware serial with a MIDI cable
-MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, midi2);
-#endif  //MIDI_DIN
-
+  #include <MIDIUSB.h>
 #endif  // ATMEGA32U4
 
-//////////////////////////////////////
-
-//////////////////////
-// Add this lib if using a cd4067 multiplexer
 #ifdef USING_MUX
-#include <Multiplexer4067.h>  // Multiplexer CD4067 library >> https://github.com/sumotoy/Multiplexer4067
+  #include <Multiplexer4067.h>  // Multiplexer CD4067 library >> https://github.com/sumotoy/Multiplexer4067
 #endif
 
-//////////////////////
-// Threads
-#include <Thread.h>            // Threads library >> https://github.com/ivanseidel/ArduinoThread
-#include <ThreadController.h>  // Same as above
-
-///////////////////////////////////////////
 // MULTIPLEXERS
 #ifdef USING_MUX
 
-#define N_MUX 1  // number of multiplexers
+  // Threads
+  #include <Thread.h>            // Threads library >> https://github.com/ivanseidel/ArduinoThread
+  #include <ThreadController.h>  // Same as above
 
-#define s0 10
-#define s1 11
-#define s2 14
-#define s3 13
+  #define N_MUX 1  // number of multiplexers
 
-#define x1 A0  // analog pin of the first mux
-//#define x2 A1 // analog pin of the second mux
-//#define x3 A2 // analog pin of the third mux
+  #define s0 10
+  #define s1 11
+  #define s2 14
+  #define s3 13
 
-// Define s0, s1, s2, s3, and x pins
-const int mux_s[4] = { s0,s1,s2,s3 };
-const int mux_x[N_MUX] = { A0 };  // analog pin of the first mux
+  #define x1 A0  // analog pin of the first mux
+  //#define x2 A1 // analog pin of the second mux
+  //#define x3 A2 // analog pin of the third mux
 
-// add more #define and the x number if you need
+  // Define s0, s1, s2, s3, and x pins
+  const int mux_s[4] = { s0,s1,s2,s3 };
+  const int mux_x[N_MUX] = { A0 };  // analog pin of the first mux
 
-// *** IMPORTANT: if you want to add more than one mux! ***
-// In the Setup tab, line 123, add another "pinMode(x2, INPUT_PULLUP);" if you want to add a second mux,
-// and "pinMode(x3, INPUT_PULLUP);" for a third mux, and so on...
+  // add more #define and the x number if you need
 
-// Initializes the multiplexer
-Multiplexer4067 mux[N_MUX] = {
-  Multiplexer4067(s0, s1, s2, s3, x1),  // The SIG pin where the multiplexer is connnected
-  //  Multiplexer4067(s0, s1, s2, s3, x2), // The SIG pin where the multiplexer is connnected
-  //  Multiplexer4067(s0, s1, s2, s3, x3) // The SIG pin where the multiplexer is connnected
-  // ...
-};
+  // *** IMPORTANT: if you want to add more than one mux! ***
+  // In the Setup tab, line 123, add another "pinMode(x2, INPUT_PULLUP);" if you want to add a second mux,
+  // and "pinMode(x3, INPUT_PULLUP);" for a third mux, and so on...
+
+  // Initializes the multiplexer
+  Multiplexer4067 mux[N_MUX] = {
+    Multiplexer4067(s0, s1, s2, s3, x1),  // The SIG pin where the multiplexer is connnected
+    //  Multiplexer4067(s0, s1, s2, s3, x2), // The SIG pin where the multiplexer is connnected
+    //  Multiplexer4067(s0, s1, s2, s3, x3) // The SIG pin where the multiplexer is connnected
+    // ...
+  };
 
 #endif
 
 #ifdef USING_POTENTIOMETERS
-// include the ResponsiveAnalogRead library
-#include <ResponsiveAnalogRead.h>  // https://github.com/dxinteractive/ResponsiveAnalogRead
+  // include the ResponsiveAnalogRead library
+  #include <ResponsiveAnalogRead.h>  // https://github.com/dxinteractive/ResponsiveAnalogRead
 #endif
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -125,66 +105,66 @@ byte PB = 4;  // Pitch Bend
 // BUTTONS
 #ifdef USING_BUTTONS
 
-const byte N_BUTTONS = 0;                          //  total numbers of buttons. Number of buttons in the Arduino + number of buttons on multiplexer 1 + number of buttons on multiplexer 2... (DON'T put Octave and MIDI channel (bank) buttons here)
+  const byte N_BUTTONS = 0;                          //  total numbers of buttons. Number of buttons in the Arduino + number of buttons on multiplexer 1 + number of buttons on multiplexer 2... (DON'T put Octave and MIDI channel (bank) buttons here)
 
-const byte N_BUTTONS_ARDUINO = 0;                             // number of buttons connected straight to the Arduino
-const byte BUTTON_ARDUINO_PIN[N_BUTTONS_ARDUINO] = {  };  // pins of each button connected straight to the Arduino
+  const byte N_BUTTONS_ARDUINO = 0;                             // number of buttons connected straight to the Arduino
+  const byte BUTTON_ARDUINO_PIN[N_BUTTONS_ARDUINO] = {  };  // pins of each button connected straight to the Arduino
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#ifdef USING_MUX                                      // Fill if you are using mux, otherwise just leave it
-const byte N_BUTTONS_PER_MUX[N_MUX] = { 0 };  // number of buttons in each mux (in order)
-const byte BUTTON_MUX_PIN[N_MUX][16] = {  };
+  #ifdef USING_MUX                                      // Fill if you are using mux, otherwise just leave it
+  const byte N_BUTTONS_PER_MUX[N_MUX] = { 0 };  // number of buttons in each mux (in order)
+  const byte BUTTON_MUX_PIN[N_MUX][16] = {  };
 
-int buttonMuxThreshold = 850;
+  int buttonMuxThreshold = 850;
 
-#endif  //USING_MUX
+  #endif  //USING_MUX
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// What type of message do you want to send?
-// Note Number - Control Change - Toggle - Program Change
+  // What type of message do you want to send?
+  // Note Number - Control Change - Toggle - Program Change
 
-// NN: Note number or MACKIE
-// CC: Control change
-// T: Toggle
-// PC: Program Change
+  // NN: Note number or MACKIE
+  // CC: Control change
+  // T: Toggle
+  // PC: Program Change
 
-// Put here the type of message you want to send, in the same order you declared the button pins
-// "NN" for Note Number | "CC" for Control Change | "T" for Note Number but in toggle mode | "PC" for Program Change
-byte MESSAGE_TYPE[N_BUTTONS] = { button-msg-type };
+  // Put here the type of message you want to send, in the same order you declared the button pins
+  // "NN" for Note Number | "CC" for Control Change | "T" for Note Number but in toggle mode | "PC" for Program Change
+  byte MESSAGE_TYPE[N_BUTTONS] = { button-msg-type };
 
-// Put here the number of the message you want to send, in the right order, no matter if it's a note number, CC (or MACKIE), Program Change
-byte MESSAGE_VAL[N_BUTTONS] = { buttons-msg-val };
+  // Put here the number of the message you want to send, in the right order, no matter if it's a note number, CC (or MACKIE), Program Change
+  byte MESSAGE_VAL[N_BUTTONS] = { buttons-msg-val };
 
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#ifdef USING_BANKS_WITH_BUTTONS
+  #ifdef USING_BANKS_WITH_BUTTONS
 
-//#define USING_MUX_BANK_BUTTON_PIN 1; // Define if you are using the bank buttons on the Mux pin. It has to be the first mux.
-const byte BANK_BUTTON_PIN[2] = { 16, 10 };  // first will decrease MIDI chennel and second will increase
+  //#define USING_MUX_BANK_BUTTON_PIN 1; // Define if you are using the bank buttons on the Mux pin. It has to be the first mux.
+  const byte BANK_BUTTON_PIN[2] = { 16, 10 };  // first will decrease MIDI chennel and second will increase
 
-#endif  //USING_BANKS_WITH_BUTTONS
+  #endif  //USING_BANKS_WITH_BUTTONS
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#ifdef USING_OCTAVE
+  #ifdef USING_OCTAVE
 
-#define USING_MUX_OCTAVE_PIN 1;              // Define if you are using the octave buttons on the Mux pin. It has to be the first mux.
-const byte OCTAVE_BUTTON_PIN[2] = { 5, 4 };  // first will decrease MIDI channel and second will increase
+  #define USING_MUX_OCTAVE_PIN 1;              // Define if you are using the octave buttons on the Mux pin. It has to be the first mux.
+  const byte OCTAVE_BUTTON_PIN[2] = { 5, 4 };  // first will decrease MIDI channel and second will increase
 
-#endif  // USING_OCTAVE
+  #endif  // USING_OCTAVE
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-//#define pin13 1 // uncomment if you are using pin 13 (pin with led), or comment the line if it is not
-byte pin13index = 12;  // put the index of the pin 13 of the buttonPin[] array if you are using, if not, comment
+  //#define pin13 1 // uncomment if you are using pin 13 (pin with led), or comment the line if it is not
+  byte pin13index = 12;  // put the index of the pin 13 of the buttonPin[] array if you are using, if not, comment
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// debounce
-unsigned long debounceDelay = 50;  // the debounce time; increase if the output flickers
+  // debounce
+  unsigned long debounceDelay = 50;  // the debounce time; increase if the output flickers
 
 #endif  // USING_BUTTONS
 
@@ -194,36 +174,36 @@ unsigned long debounceDelay = 50;  // the debounce time; increase if the output 
 
 #ifdef USING_POTENTIOMETERS
 
-const byte N_POTS = 4;  // total numbers of pots (slide & rotary). Number of pots in the Arduino + number of pots on multiplexer 1 + number of pots on multiplexer 2...
+  const byte N_POTS = 4;  // total numbers of pots (slide & rotary). Number of pots in the Arduino + number of pots on multiplexer 1 + number of pots on multiplexer 2...
 
-const byte N_POTS_ARDUINO = 0;  // number of pots connected straight to the Arduino
-// If using the Arduino declare as "A1, A2"
-// If using ESP32 only use the GPIO number as "11, 10"
-const byte POT_ARDUINO_PIN[N_POTS_ARDUINO] = {  };  // pins of each pot connected straight to the Arduino (don't use "A" if you are using ESP32, only the number)
+  const byte N_POTS_ARDUINO = 0;  // number of pots connected straight to the Arduino
+  // If using the Arduino declare as "A1, A2"
+  // If using ESP32 only use the GPIO number as "11, 10"
+  const byte POT_ARDUINO_PIN[N_POTS_ARDUINO] = {  };  // pins of each pot connected straight to the Arduino (don't use "A" if you are using ESP32, only the number)
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#ifdef USING_MUX
-const byte N_POTS_PER_MUX[N_MUX] = { 4 };  // number of pots in each multiplexer (in order)
-const byte POT_MUX_PIN[N_MUX][16] = { 0,1,2,3 };
-#endif
+  #ifdef USING_MUX
+  const byte N_POTS_PER_MUX[N_MUX] = { 4 };  // number of pots in each multiplexer (in order)
+  const byte POT_MUX_PIN[N_MUX][16] = { 0,1,2,3 };
+  #endif
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#define USING_CUSTOM_CC_N 1  // comment if not using CUSTOM CC NUMBERS, uncomment if using it.
-#ifdef USING_CUSTOM_CC_N
+  #define USING_CUSTOM_CC_N 1  // comment if not using CUSTOM CC NUMBERS, uncomment if using it.
+  #ifdef USING_CUSTOM_CC_N
 
-// What type of message do you want to send?
-// Control Change - Pitch Bend
+  // What type of message do you want to send?
+  // Control Change - Pitch Bend
 
-// CC: Control change
-// PB: Pitch Bend
+  // CC: Control change
+  // PB: Pitch Bend
 
-// Put here the type of message you want to send, in the same order you declared the button pins
-// "CC" for Control Change | "PB" for Pitch Bend
-byte MESSAGE_TYPE_POT[N_POTS] = { CC };
+  // Put here the type of message you want to send, in the same order you declared the button pins
+  // "CC" for Control Change | "PB" for Pitch Bend
+  byte MESSAGE_TYPE_POT[N_POTS] = { CC };
 
-byte POT_CC_N[N_POTS] = { 0,1,2,3 };  // Add the CC, or PB, NUMBER or MACKIE of each pot you want
+  byte POT_CC_N[N_POTS] = { 0,1,2,3 };  // Add the CC, or PB, NUMBER or MACKIE of each pot you want
 
 #endif
 

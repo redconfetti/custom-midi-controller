@@ -11,6 +11,38 @@
 
 * Prototyping can be accomplished with a Leonardo, Micro, or Pro Micro
 
+## Arduino Micro Controller
+
+Only certain Arduino models are able to act as MIDI-class compliant controllers,
+where you plug them in and the computer detects them as a MIDI device. Although
+the Mega and Uno are compatible to do this, this project is coded for boards
+using the ATmega32U4 processor.
+
+* Official Arduino
+  * [Arduino Leonardo][]
+    * Processor: ATmega32U4
+    * Interface: USB controller built into processor
+    * 20 digital I/O Pins
+      * 7 can also be PWM Outputs
+      * 12 act as Analog Inputs
+  * [Arduino Micro][]
+    * Processor: ATmega32U4
+    * Interface: USB controller built into processor
+* Arduino Compatible Devices
+  * [Pro Micro][]
+    * Processor: ATmega32U4
+    * Interface: USB controller built into processor
+    * A popular low-cost compact Arduino-compatible board.
+    * Available in 3.3 V and 5 V versions.
+
+A Leonardo is recommended for prototyping, with a Micro or Pro Micro used for
+final products. These are combinated with Multiplexers to increase the number of
+inputs.
+
+[Arduino Leonardo]: https://docs.arduino.cc/hardware/leonardo/
+[Arduino Micro]: https://docs.arduino.cc/hardware/micro/
+[Pro Micro]: https://www.sparkfun.com/products/12640
+
 ## CD4067BE Multiplexer IC
 
 [CD4067 16-Channel Analog Multiplexer/ Demultiplexer][]
