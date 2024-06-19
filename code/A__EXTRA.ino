@@ -11,10 +11,6 @@ ThreadController cpu;         //thread master, where the other threads will be a
 Thread threadPotentiometers;  // thread to control the pots
 Thread threadChannelMenu;     // thread to control the pots
 
-#ifdef USING_BANKS_WITH_BUTTONS
-Thread threadBanksWithButtons;
-#endif
-
 #ifdef USING_OCTAVE
 Thread threadChangeOctave;
 #endif

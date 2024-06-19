@@ -15,17 +15,7 @@ int potVar = 0;                 // Difference between the current and previous s
 int potMidiCState[N_POTS] = { 0 };  // Current state of the midi value
 int potMidiPState[N_POTS] = { 0 };  // Previous state of the midi value
 
-#ifdef USING_HIGH_RES_FADERS
-// Use this to send CC using 2 bytes (14 bit res)
-unsigned int highResFader = 0;  // stores the high res val
-byte faderMSB = 0;              // Most Significant Byte
-byte faderLSB = 0;              // Least Significant Byte
-byte pFaderLSB = 0;             // Previous Most Significant Byte
-#endif
-
-//#ifdef USING_MACKIE
 int PBVal[N_POTS] = { 0 };
-//#endif
 
 boolean potMoving = true;             // If the potentiometer is moving
 unsigned long PTime[N_POTS] = { 0 };  // Previously stored time
@@ -67,60 +57,24 @@ void potentiometers() {
   }
 #endif
 
-  //Debug only
-  //    for (int i = 0; i < nPots; i++) {
-  //      Serial.print(potCState[i]); Serial.print(" ");
-  //    }
-  //    Serial.println();
+    // Debug only
+    // for (int i = 0; i < nPots; i++) {
+    //   Serial.print(potCState[i]); Serial.print(" ");
+    // }
+    // Serial.println();
 
   for (int i = 0; i < N_POTS; i++) {  // Loops through all the potentiometers
 
-#ifdef USING_MOTORIZED_FADERS
-    potCState[i] = clipValue(potCState[i], faderMin[i], faderMax[i]);
-    potMidiCState[i] = map(potCState[i], faderMin[i], faderMax[i], 0, 127);  // Maps the reading of the potCState to a value usable in midi
-    potMidiCState[i] = clipValue(potMidiCState[i], 0, 127);
-#else
+
     potCState[i] = clipValue(potCState[i], potMin, potMax);
+
     //potMidiCState[i] = map(potCState[i], potMin, potMax, 0, 127); // Maps the reading of the potCState to a value usable in midi
     potMidiCState[i] = map(potCState[i], potMin, potMax, 0, 127);  // Maps the reading of the potCState to a value usable in midi
     potMidiCState[i] = clipValue(potMidiCState[i], 0, 127);
-#endif
 
     //potMidiCState[i] = potCState[i] >> 3; // Maps the reading of the potCState to a value usable in midi
 
-#ifdef USING_HIGH_RES_FADERS  // if def
-#ifdef USING_MOTORIZED_FADERS
-    highResFader = map(potCState[i], faderMin[i], faderMax[i], 0, 16383);  // converts the 10bit range to 14bit (it will skip some values on 14bit)
-    faderMSB = highResFader / 128;                                         // Most Sigficant Byte
-    faderLSB = highResFader % 128;                                         // Least Sigficant Byte
-
-#else   // if not USING_MOTORIZED_FADERS
-
-    highResFader = map(potCState[i], potMin, potMax, 0, 16383);  // converts the 10bit range to 14bit (it will skip some values on 14bit)
-    faderMSB = highResFader / 128;                               // Most Sigficant Byte
-    faderLSB = highResFader % 128;                               // Least Sigficant Byte
-#endif  // USING_MOTORIZED_FADERS
-
-#endif  // USING_HIGH_RES_FADERS
-
     PBVal[i] = map(potCState[i], potMin, potMax, 0, 16383);
-
-#ifdef USING_MACKIE  // if using Remote Script
-
-#ifdef USING_MOTORIZED_FADERS
-    PBVal[i] = map(potCState[i], faderMin[i], faderMax[i], 0, 16383);
-#else   // if not USING_MOTORIZED_FADERS
-    PBVal[i] = map(potCState[i], potMin, potMax, 0, 16383);
-#endif  // if not USING_MOTORIZED_FADERS
-
-    if (PBVal[i] < 0) {
-      PBVal[i] = 0;
-    }
-    if (PBVal[i] > 16383) {
-      PBVal[i] = 16383;
-    }
-#endif  // USING_MACKIE
-
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -140,12 +94,7 @@ void potentiometers() {
 
     if (potMoving == true) {  // If the potentiometer is still moving, send the change control
 
-
-#ifdef USING_HIGH_RES_FADERS
-      if (faderLSB != pFaderLSB) {
-#else
       if (potMidiPState[i] != potMidiCState[i]) {
-#endif  // USING_HIGH_RES_FADERS
 
 #ifdef USING_MOTORIZED_FADERS
         if (isTouched[i] == true) {
@@ -157,16 +106,6 @@ void potentiometers() {
           // Sends the MIDI CC accordingly to the chosen board
 #ifdef ATMEGA328
           // use if using with ATmega328 (uno, mega, nano...)
-
-#ifdef USING_MACKIE  // if USING Remote Script protocol
-          MIDI.sendPitchBend(PBVal[i], POT_CC_N[i]);
-
-#elif USING_HIGH_RES_FADERS  // if def
-
-          MIDI.sendControlChange(POT_CC_N[i], faderMSB, POT_MIDI_CH);       // MSB
-          MIDI.sendControlChange(POT_CC_N[i] + 32, faderLSB, POT_MIDI_CH);  // LSB
-
-#else  // not using Mackie or HighRes
 
 #ifdef USING_CUSTOM_CC_N
 
@@ -183,7 +122,6 @@ void potentiometers() {
           MIDI.sendControlChange(CC_NUMBER + i, potMidiCState[i], POT_MIDI_CH);  // CC number, CC value, midi channel
 #endif  // USING_CUSTOM_CC_N
 
-#endif  // NOT USING_MACKIE
 
           // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -400,8 +338,5 @@ void potentiometers() {
     }
   }
 }
-
-
-
 
 #endif  // USING_POTENTIOMETERS

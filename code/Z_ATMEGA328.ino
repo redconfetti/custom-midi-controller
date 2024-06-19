@@ -1,7 +1,5 @@
 #ifdef ATMEGA328
 
-
-
 // MyHandleNoteOFF is the function that will be called by the Midi Library
 // when a MIDI NOTE OFF message is received.
 // * A NOTE ON message with Velocity = 0 will be treated as a NOTE OFF message *
