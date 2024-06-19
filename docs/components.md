@@ -4,10 +4,12 @@
 
 [MIDI Controller Diagram]: /assets/midi-controller_bb.png "MIDI Controller Diagram"
 
-* 1 - Arduino Pro Micro
+* 1 - Arduino Pro Micro*
 * 24 - B10K potentiometers
 * 24 - Momentary Push Buttons / Switches
 * 3 - 4067 Multiplexers
+
+* Prototyping can be accomplished with a Leonardo, Micro, or Pro Micro
 
 ## CD4067BE Multiplexer IC
 
