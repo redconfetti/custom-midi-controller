@@ -1,23 +1,19 @@
 void loop() {
 
-#ifdef ATMEGA32U4
+  #ifdef ATMEGA32U4
 
-  // it will read MIDI incoming messages if using ATMEGA32U4
-  MIDIread();
+    // it will read MIDI incoming messages if using ATMEGA32U4
+    MIDIread();
 
-#ifdef MIDI_DIN
-  midi2.read();
-#endif
+    #ifdef MIDI_DIN
+      midi2.read();
+    #endif
 
-#endif
+  #endif
 
-#ifdef ATMEGA328
-  MIDI.read();
-#endif
-
-#ifdef USING_BUTTONS
-  buttons();
-#endif
+  #ifdef USING_BUTTONS
+    buttons();
+  #endif
 
   cpu.run(); // for threads
 

@@ -17,12 +17,10 @@
 /////////////////////////////////////////////
 // Choosing your board
 // Define your board, choose:
-// "ATMEGA328" if using ATmega328 - Uno, Mega, Nano...
 // "ATMEGA32U4" if using with ATmega32U4 - Micro, Pro Micro, Leonardo...
-// "TEENSY" if using a Teensy board
-// "BLEMIDI" if using BLE MIDI (ESP32)
 // "DEBUG" if you just want to debug the code in the serial monitor
 
+#define DEBUG 1 // output debug to serial
 #define ATMEGA32U4 1  // put here the uC you are using, like in the lines above followed by "1", like "ATMEGA328 1", "DEBUG 1", etc.
 
 /////////////////////////////////////////////
@@ -33,67 +31,11 @@
 // Are you using potentiometers?
 #define USING_POTENTIOMETERS 1  // comment if not using potentiometers
 
-// Are you using high res faders?
-//#define USING_HIGH_RES_FADERS 1 // comment if not using high res faders (any fader can be high res)
-
-// Are you using Motorized Faders?
-//#define USING_MOTORIZED_FADERS 1 // comment if not using a motorized fader
-
 /////////////////////////////////////////////
 // Are you using a multiplexer?
 #define USING_MUX 1 // comment if not using a multiplexer, uncomment if using it.
 
-/////////////////////////////////////////////
-// Are you using encoders?
-//#define USING_ENCODER 1  // comment if not using encoders, uncomment if using it.
-//#define USING_ENCODER_MCP23017 1
-//#define TRAKTOR 1 // uncomment if using with traktor, comment if not
-
-// Are you using high res ENCODER?
-//#define USING_HIGH_RES_ENC 1  // comment if not using high res faders (any fader can be high res)
-
-/////////////////////////////////////////////
-// Are you using neopixels (any addressable strips)?
-//#define USING_NEOPIXEL 1 // comment if not using neopixels, uncomment if using it.
-
-/////////////////////////////////////////////
-// Are you using an I2C Oled Display?
-//#define USING_DISPLAY 1 // comment if not using an I2C Oled Display.
-
-/////////////////////////////////////////////
-// Are you using banks that can be switched with 2 buttons?
-//#define USING_BANKS_WITH_BUTTONS 1 // comment if not using banks with buttons.
-
-//#define BANKS_FOR_BUTTONS 1
-//#define BANKS_FOR_POTS 1
-//#define BANKS_FOR_ENCODERS 1
-
-// Are you using LED note feedback?
-//#define USING_LED_FEEDBACK 1  // comment if not using a VU
-
-/////////////////////////////////////////////
-// Are you using a 74HC595 Bit Shifter?
-// Below, use either "USING_VU" or "USING_LED_FEEDBACK"
-// Use VU to monitor audio levels, or LED feedback to get note feedback
-
-//#define USING_74HC595 1 // comment if not using 74HC595 Bit Shifter
-
-// Are you using a VU (led meter)?
-//#define USING_VU 1// comment if not using a VU
-
-// Are you using the Mackie Protocol?
-//#define USING_MACKIE 1
-
-// Are you using two buttons for octave change?
-//#define USING_OCTAVE 1
-
-// Are you using Physical MIDI din 5-pin connector?
-//#define MIDI_DIN 1
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////
 // LIBRARIES

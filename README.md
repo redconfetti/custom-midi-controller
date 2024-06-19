@@ -15,5 +15,6 @@
 ## Documentation
 
 * [Components](/docs/components.md)
+* [C Notes](/docs/c_notes.md)
 * [Musiconerd Courses](/docs/musiconerd.md)
 * [Embedded Development Frameworks](/docs/embedded-dev-framework.md)
