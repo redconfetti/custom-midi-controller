@@ -9,11 +9,15 @@ Code Generator by Gustavo Silveira of [Musiconerd.com][], as part of the
 
 ## Making Music for Arduino
 
-* [Code Generator Lesson][]
-* [Advanced Code Generator][]
+* [Basic Code Generator Lesson][]
+* [Basic Code Generator][]
+* [Advanced Code Generator Lesson][]
+  * [Advanced Code Generator][]
 * [Code Generator Source][]
 
-[Code Generator Lesson]: https://course.musiconerd.com/products/23c642ac-a924-4aa6-a05f-85cef105a1f8/categories/56fa17f4-ac79-43b2-8609-156c1ed5c5e0/posts/bf97fb7d-4ed8-40ce-976e-dbef7c3d3329
+[Basic Code Generator Lesson]: https://course.musiconerd.com/products/23c642ac-a924-4aa6-a05f-85cef105a1f8/categories/56fa17f4-ac79-43b2-8609-156c1ed5c5e0/posts/b12a9719-7717-426f-bc08-47e4baec0012
+[Advanced Code Generator Lesson]: https://course.musiconerd.com/products/23c642ac-a924-4aa6-a05f-85cef105a1f8/categories/56fa17f4-ac79-43b2-8609-156c1ed5c5e0/posts/bf97fb7d-4ed8-40ce-976e-dbef7c3d3329
+[Basic Code Generator]: https://go.musiconerd.com/code-gen-basic
 [Advanced Code Generator]: https://go.musiconerd.com/code-gen-advanced
 [Code Generator Source]: https://github.com/silveirago/code-gen-full
 
