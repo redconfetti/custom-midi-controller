@@ -43,6 +43,19 @@ inputs.
 [Arduino Micro]: https://docs.arduino.cc/hardware/micro/
 [Pro Micro]: https://www.sparkfun.com/products/12640
 
+## Buttons
+
+This form of button is known as a [tactile switch][].
+
+![Tactile Switch PNG]
+
+Although it appears to have 4 pins, it only has 2. The two pins on the left are
+connected, as are the other two pins on the right (top and bottom). When you
+press the switch, the two sides become connected and current flows through.
+
+[tactile switch]: https://www.cuidevices.com/blog/tactile-switches-101
+[Tactile Switch PNG]: /assets/tactile-switch.png "Tactile Switch"
+
 ## CD4067BE Multiplexer IC
 
 [CD4067 16-Channel Analog Multiplexer/ Demultiplexer][]
