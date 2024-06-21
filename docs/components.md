@@ -43,6 +43,14 @@ inputs.
 [Arduino Micro]: https://docs.arduino.cc/hardware/micro/
 [Pro Micro]: https://www.sparkfun.com/products/12640
 
+## Potentiometers
+
+![Potentiometer B10K]
+*Image from [Quartz Components][]*
+
+[Quartz Components]: https://quartzcomponents.com/products/10k-potentiometer
+[Potentiometer B10K]: /assets/Potentiometer-B10K-3pin.png "Potentiometer B10K 3 pin"
+
 ## Buttons
 
 This form of button is known as a [tactile switch][].
@@ -52,6 +60,11 @@ This form of button is known as a [tactile switch][].
 Although it appears to have 4 pins, it only has 2. The two pins on the left are
 connected, as are the other two pins on the right (top and bottom). When you
 press the switch, the two sides become connected and current flows through.
+
+The left pin connects to Ground (GND), and the left connects to the input pin.
+
+Analog switches can conduct both analog and digital signals from the input pin
+to the output pin.
 
 [tactile switch]: https://www.cuidevices.com/blog/tactile-switches-101
 [Tactile Switch PNG]: /assets/tactile-switch.png "Tactile Switch"
