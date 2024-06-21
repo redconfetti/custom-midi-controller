@@ -18,7 +18,3 @@ int clipValue(int in, int minVal, int maxVal) {
 
   return out;
 }
-
-float lerp(float x1, float x2, float ratio) {
-  return x1 + (x2 - x1) * ratio;
-}
