@@ -14,6 +14,7 @@
 
 ## Documentation
 
+* [Design](docs/design.md)
 * [Development](/docs/dev.md)
 * [Components](/docs/components.md)
 * [C Notes](/docs/c_notes.md)

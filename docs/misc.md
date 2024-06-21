@@ -1,5 +1,11 @@
 # Misc
 
+## Alternative Inputs
+
+* [Trill touch sensors][]
+
+[Trill touch sensors]: https://bela.io/products/trill/
+
 ## PlatformIO
 
 Wokwi is a cloud-based platform, but you can also use it with the
