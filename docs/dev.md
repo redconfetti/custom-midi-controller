@@ -137,10 +137,12 @@ Wokwi enables developers to simulate the behavior of common microcontrollers
 such as the Arduino, ESP32, STM32, and Raspberry Pi Pico.
 
 * [Wokwi - Project Config][]
+* [Wokwi Docs][]
 
 [Wokwi]: https://wokwi.com/
 [Wokwi for VS Code]: https://docs.wokwi.com/vscode/getting-started
 [Wokwi - Project Config]: https://docs.wokwi.com/vscode/project-config
+[Wokwi Docs]: https://docs.wokwi.com/
 
 ## C Programming Notes
 
