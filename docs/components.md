@@ -78,6 +78,9 @@ to the output pin.
 ![CD74HC4067 Breakout Schematic]
 *Taken from [Sparkfun Multiplexer Breakout]*
 
+[Multiplexer Breakout Hookup][]
+
+[Multiplexer Breakout Hookup]: https://learn.sparkfun.com/tutorials/multiplexer-breakout-hookup-guide/all
 [Sparkfun Multiplexer Breakout]: https://cdn.sparkfun.com/datasheets/BreakoutBoards/Analog-Digital-Mux-Breakout-v11.pdf
 
 Course example uses a CD74HC4067 Multiplexer Breakout board.
@@ -108,6 +111,81 @@ Course example uses a CD74HC4067 Multiplexer Breakout board.
 | OUT 9      | C9       | Channel 10       | 22  |
 | OUT 8      | C8       | Channel 9        | 23  |
 | VDD        | VCC      | 5 volt           | 24  |
+
+
+### Bitwise Operations
+
+A combination of a Binary Right Shift Operator (`>>`) and
+a [Bitwise Operation AND][], results in the values our microcontroller needs to
+send to the multiplexer to read the values of a specific channel.
+
+The [CD74HC4067] docs provided by Wokwi link to [an example][] that uses the
+following function to read from a specific input pin on the multiplexer.
+
+```c
+#define COM 34
+const uint8_t controlPins[] = { 23, 22, 21, 19 };
+
+float readMux(int channel)
+{
+  for(int i = 0; i < 4; i ++)
+  {
+    digitalWrite(controlPins[i], channel >> i & 1);
+  }
+  delay(10);
+  return analogRead(COM);
+}
+```
+
+The `channel >> i & 1` portion of the above code creates a 4 bit output
+on the 4 control pins of the multiplexer.
+
+With the "Binary Right Shift Operator" - `>>`, the left operands value is moved
+right by the number of bits specified by the right operand.
+
+Here is a Ruby equivalent of the same operations.
+
+```ruby
+(0..15).each do |channel|
+  bits = []
+  4.times do |i|
+    bits << (channel >> i & 1)
+  end
+  puts "channel \##{channel}; bits: #{bits.inspect}"
+end
+# channel #0; bits: [0, 0, 0, 0]
+# channel #1; bits: [1, 0, 0, 0]
+# channel #2; bits: [0, 1, 0, 0]
+# channel #3; bits: [1, 1, 0, 0]
+# channel #4; bits: [0, 0, 1, 0]
+# channel #5; bits: [1, 0, 1, 0]
+# channel #6; bits: [0, 1, 1, 0]
+# channel #7; bits: [1, 1, 1, 0]
+# channel #8; bits: [0, 0, 0, 1]
+# channel #9; bits: [1, 0, 0, 1]
+# channel #10; bits: [0, 1, 0, 1]
+# channel #11; bits: [1, 1, 0, 1]
+# channel #12; bits: [0, 0, 1, 1]
+# channel #13; bits: [1, 0, 1, 1]
+# channel #14; bits: [0, 1, 1, 1]
+# channel #15; bits: [1, 1, 1, 1]
+```
+
+It appears that converting decimal numbers to Base-2 strings, with 4-bit zero
+padding, reversed, brings the same result.
+
+```ruby
+13.to_s(2).rjust(4, "0").reverse
+=> "1011"
+8.to_s(2).rjust(4, "0").reverse
+=> "0001"
+```
+
+Nonetheless, it just works.
+
+[Bitwise Operation AND]: https://en.wikipedia.org/wiki/Bitwise_operation#AND
+[CD74HC4067]: https://github.com/Droog71/CD74HC4067/blob/main/README.md
+[an example]: https://wokwi.com/projects/366560040454111233
 
 [CD4067 16-Channel Analog Multiplexer/ Demultiplexer]: https://components101.com/article/cd4067-16-channel-analog-multiplexer-demultiplexer
 [CD4067BE pinout]: /assets/cd4067b-pinout.jpg "CD4067B Pin-out"
